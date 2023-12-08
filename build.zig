@@ -19,6 +19,7 @@ pub fn setup_day(
         run_cmd.addArgs(args);
     }
 
+    std.debug.print("{s}", .{b.fmt("run_{s}", .{path})});
     const run_step = b.step(b.fmt("run_{s}", .{path}), "Run specified day");
     run_step.dependOn(&run_cmd.step);
 
@@ -32,7 +33,7 @@ pub fn build(b: *std.build.Builder) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    comptime var counter: usize = 1;
+    comptime var counter: usize = 2;
     inline while (counter <= 1) {
         setup_day(b, target, optimize, counter);
         counter += 1;
